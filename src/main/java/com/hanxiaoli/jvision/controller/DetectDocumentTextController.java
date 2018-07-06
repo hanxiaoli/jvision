@@ -31,7 +31,7 @@ import com.hanxiaoli.jvision.model.Mynumber;
 public class DetectDocumentTextController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping("/document")
+	@RequestMapping("/mynumber")
 	public Mynumber handle() {
 
 		Mynumber mynumber = new Mynumber();
