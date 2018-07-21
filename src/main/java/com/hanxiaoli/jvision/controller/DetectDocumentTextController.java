@@ -17,15 +17,18 @@ import com.google.cloud.vision.v1.BatchAnnotateImagesResponse;
 import com.google.cloud.vision.v1.Block;
 import com.google.cloud.vision.v1.Feature;
 import com.google.cloud.vision.v1.Feature.Type;
+import com.google.cloud.vision.v1.Vertex.Builder;
 import com.google.cloud.vision.v1.Image;
 import com.google.cloud.vision.v1.ImageAnnotatorClient;
 import com.google.cloud.vision.v1.Page;
 import com.google.cloud.vision.v1.Paragraph;
 import com.google.cloud.vision.v1.Symbol;
 import com.google.cloud.vision.v1.TextAnnotation;
+import com.google.cloud.vision.v1.Vertex;
 import com.google.cloud.vision.v1.Word;
 import com.google.protobuf.ByteString;
 import com.hanxiaoli.jvision.model.Mynumber;
+import com.hanxiaoli.jvision.model.Triangle;
 
 @RestController
 public class DetectDocumentTextController {
@@ -33,6 +36,17 @@ public class DetectDocumentTextController {
 
 	@RequestMapping("/mynumber")
 	public Mynumber handle() {
+		
+		Builder pointLeftBuilder = Vertex.newBuilder();
+		pointLeftBuilder.setX(50);
+		pointLeftBuilder.setY(50);
+		
+		Builder pointRightBuilder = Vertex.newBuilder();
+		pointRightBuilder.setX(100);
+		pointRightBuilder.setY(100);
+		
+		Triangle triangle = new Triangle(pointLeftBuilder.build(),pointRightBuilder.build());
+		triangle.getDegree(triangle.getSin());
 
 		Mynumber mynumber = new Mynumber();
 		List<AnnotateImageRequest> requests = new ArrayList<>();
