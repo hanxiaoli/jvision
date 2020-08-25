@@ -17,14 +17,15 @@ import com.google.cloud.vision.v1.BatchAnnotateImagesResponse;
 import com.google.cloud.vision.v1.Block;
 import com.google.cloud.vision.v1.Feature;
 import com.google.cloud.vision.v1.Feature.Type;
-import com.google.cloud.vision.v1.Vertex.Builder;
 import com.google.cloud.vision.v1.Image;
 import com.google.cloud.vision.v1.ImageAnnotatorClient;
+import com.google.cloud.vision.v1.ImageContext;
 import com.google.cloud.vision.v1.Page;
 import com.google.cloud.vision.v1.Paragraph;
 import com.google.cloud.vision.v1.Symbol;
 import com.google.cloud.vision.v1.TextAnnotation;
 import com.google.cloud.vision.v1.Vertex;
+import com.google.cloud.vision.v1.Vertex.Builder;
 import com.google.cloud.vision.v1.Word;
 import com.google.protobuf.ByteString;
 import com.hanxiaoli.jvision.model.Mynumber;
@@ -36,16 +37,16 @@ public class DetectDocumentTextController {
 
 	@RequestMapping("/mynumber")
 	public Mynumber handle() {
-		
+
 		Builder pointLeftBuilder = Vertex.newBuilder();
 		pointLeftBuilder.setX(50);
 		pointLeftBuilder.setY(50);
-		
+
 		Builder pointRightBuilder = Vertex.newBuilder();
 		pointRightBuilder.setX(100);
 		pointRightBuilder.setY(100);
-		
-		Triangle triangle = new Triangle(pointLeftBuilder.build(),pointRightBuilder.build());
+
+		Triangle triangle = new Triangle(pointLeftBuilder.build(), pointRightBuilder.build());
 		triangle.getDegree(triangle.getSin());
 
 		Mynumber mynumber = new Mynumber();
@@ -65,7 +66,8 @@ public class DetectDocumentTextController {
 
 		Image img = Image.newBuilder().setContent(imgBytes).build();
 		Feature feat = Feature.newBuilder().setType(Type.DOCUMENT_TEXT_DETECTION).build();
-		AnnotateImageRequest request = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img).build();
+		AnnotateImageRequest request = AnnotateImageRequest.newBuilder().addFeatures(feat).setImage(img)
+				.setImageContext(ImageContext.newBuilder().addLanguageHints("ja")).build();
 		requests.add(request);
 
 		try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {

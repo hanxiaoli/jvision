@@ -91,7 +91,7 @@ public class DetectDocumentTextService {
 	//
 	private double degreeBack;
 
-	public DetectDocumentTextService(TextAnnotation annotation) {
+	public void handle(TextAnnotation annotation) {
 		this.annotation = annotation;
 		this.simplePages = annotation.getPages(0);
 		this.simpleBlocks = annotation.getPages(0).getBlocksList();
@@ -178,7 +178,7 @@ public class DetectDocumentTextService {
 	 *
 	 * @param Array $area
 	 */
-	public static Map<String, Integer> cutArea(List<Vertex> vertices) {
+	public Map<String, Integer> cutArea(List<Vertex> vertices) {
 		List<Integer> xs = new ArrayList<Integer>();
 		List<Integer> ys = new ArrayList<Integer>();
 
@@ -200,7 +200,16 @@ public class DetectDocumentTextService {
 	public static String messageVertices(BoundingPoly boundingBox) {
 		String message = "";
 		for (Vertex vertex : boundingBox.getVerticesList()) {
-			message = "(" + message + vertex.getX() + ", " + vertex.getY() + ")";
+			message = message + "(" + vertex.getX() + ", " + vertex.getY() + ")";
+		}
+
+		return message;
+	}
+
+	public static String messageVertices(List<Vertex> vertices) {
+		String message = "";
+		for (Vertex vertex : vertices) {
+			message = message + "(" + vertex.getX() + ", " + vertex.getY() + ")";
 		}
 
 		return message;

@@ -3,7 +3,7 @@ Implementation-Title: jvision
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: hanxiaoli
 Implementation-Vendor-Id: com.hanxiaoli
-Build-Jdk: 1.8.0_181
+Build-Jdk: 1.8.0_172
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/jvision
 Created-By: Maven Integration for Eclipse
